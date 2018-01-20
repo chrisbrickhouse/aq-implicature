@@ -7,9 +7,21 @@ This repository contains files related to my first Qualifying Paper on the relat
 ### To Read
 1. Happé, F. & Frith, U. (2006). The weak coherence account: detail-focused cognitive style in autism spectrum disorders. *Journal of Autism and Developmental Disorders, 36*, 5-25.
 
+1. Hochstein, L., Bale, A., & Barner, D. (2017). Scalar implicature in absence of epistemic reasoning? The case of autism spectrum disorder. *Language Learning and Development, 13*, 1-17.
+
 1. Baron-Cohen, S., Wheelwright, S., Skinner, R., Martin, J., & Clubley, E. (2001). The Autism-Spectrum Quotient (AQ): Evidence from Asperger Syndrome/High-Functioning Autism, Males and Females, Scientists and Mathematicians. *Journal of Autism and Developmental Disorders, 31*, 5-17.
 
+1. Chevallier, C., Wilson, D., Happé, F., & Noveck, I. (2010). Scalar Inferences in Autism Spectrum Disorders. *Journal of Autism and Developmental Disorders, 40*, 1104-1117.
+
+1. Kissine, M., Cano-Chervel, J., Carlier, S., De Brabanter, P., Ducenne, L., Pairon, M., ... Leybaert, J. (2015). Children with Autism Understand Indirect Speech Acts: Evidence from a Semi-Structured Act-Out Task. *PLoS One, 10*.
+
+1. Chown, N. P. (2012). *A Treatise on Language Methods and Language-Games in Autism* (Doctoral dissertation). Retrieved from ProQuest Dissertations Publishing. 10701252.
+
+1. Kissine, M. (2012). Pragmatics, Cognitive Flexibility and Autism Spectrum Disorders. *Mind and Language, 27*, 1-28.
+
 1. Yu, A. C. L., Abrego-Collier, C., & Sonderegger, M. (2013). Phonetic Imitation from an Individual-Difference Perspective: Subjective Attitude, Personality, and "Autistic" Traits. *PLoS ONE, 8*.
+
+1. Wampers, M., Schrauwen, S., De Hert, M., Gielen, L., Schaeken, W. (2017). Patients with psychosis struggle with scalar implicatures. *Schizophrenia research*. (In press).
 
 ### Read
 
@@ -43,5 +55,5 @@ This repository contains files related to my first Qualifying Paper on the relat
   * Found such a correlation ( r = -0.304, p < 0.05 ), participants with higher AQs were less influenced by top-down lexical information in decision tasks, showing reduced boundary movement.
   * The shift seems related to 'attention switching' and 'imaginiation' sub-scales fo the AQ.
   * AQ descriptive stats: Mean = 102 (of 200), Range = 71-150, SD = 14.5
-  
+
 * Stiller, A., Goodman, N., & Frank, M. (2015). Ad-hoc Implicature in Preschool Children. *Language Learning and Development, 11*, 176-190.
