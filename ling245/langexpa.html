@@ -1,0 +1,337 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Language experiment</title>
+
+<script src="./files/jquery.min.js"></script>
+<script type="text/javascript" src="./files/mmturkey.0.5.js"></script>
+
+<script src="./files/jquery-1.12.4.js"></script>
+<script src="./files/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="./files/jquery-ui.css">
+
+
+
+<style>
+
+body {
+    font-family: serif;
+    font-size: 120%;
+    color: black;
+    min-width: 980px;
+    background: #fffff2  }
+
+div {
+    background: #fffff2;
+    padding: 4px 4px 4px 4px;
+    text-align: center;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border-radius: 4px;
+}
+
+div div {
+    background: white;
+    padding: 4px 4px 4px 4px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid black;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    /*border-radius: 5px;*/
+}
+
+label {
+    display: block;
+}
+
+.responseText{
+    background: white;
+    padding: 4px 4px 4px 4px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px transparent;
+}
+
+.leftLabel {
+    float: left;
+    font-size: 80%;
+    font-weight: bold;
+    color: #8C1515;
+}
+
+.rightLabel {
+    float: right;
+    font-size: 80%;
+    font-weight: bold;
+    color: #8C1515;
+}
+
+.centerLabel {
+    float: center;
+    font-size: 80%;
+    font-weight: bold;
+    color: black;
+}
+
+.block-text {
+  width: 500px;
+  text-align: justify;
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
+
+.questionSent {
+    margin-left: 20px;
+    margin-right: 20px;
+    /*text-indent: 20px;*/
+    text-align: left;
+}
+
+.optional {
+    text-indent: 20px;
+    text-align: left;
+}
+
+.sliders {
+        padding-bottom: 0px;
+        padding-top: 0px;
+        margin: 5px auto;
+    }
+
+</style></head>
+
+
+
+<!-- inline CSS style for now -->
+
+
+
+
+
+<!-- main html body -->
+
+<body style="">
+
+<div class="slide" id="intro" style="display: block;">
+    <div>
+
+<br>
+<img src="./files/logo-cardinal.png" alt="Stanford Department of Linguistics" width="240">
+<br>
+<br>
+<p class="block-text">We invite you to participate in a research study on language production and comprehension. Your experimenter will ask you to do a linguistic task such as reading sentences or words, naming pictures or describing scenes, making up sentences of your own, or participating in a simple language game.</p>
+
+<p class="block-text">There are no risks or benefits of any kind involved in this study.</p>
+
+<p class="block-text">You will be paid for your participation at the posted rate.</p>
+
+<p class="block-text">If you have read this form and have decided to participate in this experiment, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. You have the right to refuse to do particular tasks. Your individual privacy will be maintained in all published and written data resulting from the study.   You may print this form for your records.</p>
+
+<p class="block-text"><strong>CONTACT INFORMATION:</strong><br />If you have any questions, concerns or complaints about this research study, its procedures, risks and benefits, you should contact one of the Protocol Director Penelope Eckert (650)-725-1564</p>
+
+<p class="block-text">If you are not satisfied with how this study is being conducted, or if you have any concerns, complaints, or general questions about the research or your rights as a participant, please contact the Stanford Institutional Review Board (IRB) to speak to someone independent of the research team at (650)-723-2480 or toll free at 1-866-680-2906. You can also write to the Stanford IRB, Stanford University, 3000 El Camino Real, Five Palo Alto Square, 4th Floor, Palo Alto, CA 94306 USA.</p>
+
+<p class="block-text">If you agree to participate, please proceed to the study tasks.</p>
+
+
+<br><br>
+<button type="button" id="gotoInstructions">Proceed to instructions</button>
+<br><br>
+
+    </div>
+</div>
+
+
+
+
+<div class="slide" id="instructions" style="display: none;">
+    <div>
+
+<br><br>
+<p class="block-text">In this experiment, you will be listening to 1 sound file.<br />
+    <br />
+    You will be asked to listen to the audio and answer a short question.<br />
+    <br />
+    You may play the audio as many times as you like to help in this.
+</p>
+<br><br>
+<button type="button" id="gotoCheck">Proceed to instructions</button>
+</div>
+</div>
+
+<div class="slide" id="audioCheck" style="display: none;">
+    <div>
+
+<p class="block-text"> This experiment requires you to listen to and judge audio speech:</p>
+<p class="block-text">1: <strong>Please make sure that you have a functioning headset</strong>, and please check that your speaker volume is set to a comfortable level by clicking on the sample audio file below. We will check to make sure that you have played and listened to the audio in the main experiment, as this is crucial to our experiment.</p>
+
+<p class="block-text">2: <strong>You must be a native speaker of American English to participate in this study.</strong> To proceed, please check the boxes below to ensure that you meet both requirements, and then click on the button, " Start experiment ". </p>
+
+<p class="block-text">Note: This is a perception experiment requiring undivided attention from you. Please devote your attention solely to this task. Thanks for your participation!</p>
+
+<span style="font-weight: bold; color: #8C1515;"> Test Sound </span>
+<br>
+<button type="button" onclick="document.getElementById('sampleAudio').play()">Play test sound</button>
+<audio id="sampleAudio" style="display: none;" src="http://stanford.edu/~sunwooj/experiments/dec1/stimuli/sample.wav" src="#" type="audio/wav"></audio>
+<br><br>
+<form class="questionSent">
+  <input type="checkbox" id="native" name="native" value="1"> I am a native speaker of American English. <br>
+  <input type="checkbox" id="speaker" name="speaker" value="1"> I have a functioning headphone and an audio system that can play sound files. <br>
+</form>
+
+<br><br>
+<button type="button" id="startbutton">Start experiment</button>
+<br><br>
+<p><span style="color: blue" id="checkboxWarning"></span></p>
+
+    </div>
+</div>
+
+
+
+
+<!-- Main experiment starts here -->
+<div class="slide" id="freeResponse" style="display: none;">
+    <div>
+        <div style="border-width:0px;">
+
+<!-- Audio stimuli displayed here -->
+<br>
+<br>
+<audio id="audio1" src="#" type="audio/wav" style="display: none;"></audio>
+<audio id="audio2" src="#" type="audio/wav" style="display: none;"></audio>
+<audio id="audio3" src="#" type="audio/wav" style="display: none;"></audio>
+<audio id="audio4" src="#" type="audio/wav" style="display: none;"></audio>
+<audio id="audio5" src="#" type="audio/wav" style="display: none;"></audio>
+<audio id="audio6" src="#" type="audio/wav" style="display: none;"></audio>
+<audio id="audio7" src="#" type="audio/wav" style="display: none;"></audio>
+<audio id="audio8" src="#" type="audio/wav" style="display: none;"></audio>
+<audio id="audio9" src="#" type="audio/wav" style="display: none;"></audio>
+<audio id="audio10" src="#" type="audio/wav" style="display: none;"></audio>
+<audio id="audio11" src="#" type="audio/wav" style="display: none;"></audio>
+<audio id="audio12" src="#" type="audio/wav" style="display: none;"></audio>
+
+
+<!-- Q1: Free Response -->
+<form id="responseForm0">
+<div style="border-width:0px;">
+<p class="block-text">Often we can get impressions of people just by hearing them say a few words.
+  <br /><br />Please listen to the following words and provide three attributes that describe the talker.
+  <br /><br />You may play it as many times as you like.</p>
+</div>
+<button type="button" id="playaudio">Play</button>
+<br />
+<br />
+<textarea id="speakerPerception" rows="8" cols="60" placeholder="Please type your response here..."></textarea>
+</p>
+
+<button type="button" id="veributton">Next</button>
+
+<!-- warning message in case of no response -->
+<p><span style="color: blue" id="veriWarning"></span></p>
+</form>
+</div>
+</div>
+</div>
+
+
+<!-- Demographic information slide -->
+<div class="slide" id="language" style="display: none;">
+    <div>
+
+<p class="questionSent">
+You are done with the actual experiment. The following is a brief questionnaire about you.
+<br><br>
+Our experience with different languages, and with different dialects of English, can influence the way we speak and the way we perceive speech. Having background information on these experiences can be helpful to researchers who study language.
+<br><br>
+Therefore, although the questionnaire below is optional, we would greatly appreciate it if you could fill it out.
+</p>
+<br><br>
+
+<form id="languageForm">
+
+
+<p class="questionSent"> Do you speak any language other than English as a native speaker?
+<br>
+<input type="radio" class="res" name="age" id="20s" value="1"> Yes <br>
+<input type="radio" class="res" name="age" id="30s" value="2"> No <br>
+</p>
+<br><br>
+</form>
+
+<form id="genderForm">
+<p class="questionSent"> What is your gender?
+<br>
+<input type="radio" class="res" name="gen" id="f" value="1"> Female <br>
+<input type="radio" class="res" name="gen" id="m" value="2"> Male <br>
+<input type="radio" class="res" name="gen" id="o" value="3"> Other <br>
+</p>
+<br><br>
+</form>
+
+<form id="ageForm">
+<p class="questionSent"> What is your age?
+<br>
+<input type="radio" class="res" name="age" id="20s" value="1"> 18-29 <br>
+<input type="radio" class="res" name="age" id="30s" value="2"> 30-39 <br>
+<input type="radio" class="res" name="age" id="40s" value="3"> 40-49 <br>
+<input type="radio" class="res" name="age" id="50s" value="4"> 50-59 <br>
+<input type="radio" class="res" name="age" id="60s" value="5"> 60+ <br>
+</p>
+<br><br>
+</form>
+
+<form id="ethnicityForm">
+<p class="questionSent"> What is your ethnicity?
+<br>
+<input type="radio" class="res" name="eth" id="afa" value="1"> African American <br>
+<input type="radio" class="res" name="eth" id="asa" value="2"> Asian American <br>
+<input type="radio" class="res" name="eth" id="ca" value="3"> Caucasian <br>
+<input type="radio" class="res" name="eth" id="la" value="4"> Latina/o <br>
+<input type="radio" class="res" name="eth" id="ma" value="5"> Mixed <br>
+<input type="radio" class="res" name="eth" id="nta" value="6"> Native American <br>
+<input type="radio" class="res" name="eth" id="oa" value="7"> Other <br>
+</p>
+<br><br>
+</form>
+
+<p class="questionSent">Which area in the U.S. did you live for most of your life?
+<br>
+<input type="text" id="dialect" value="">
+</p>
+
+<p class="questionSent">Any other comments about questions above?
+<br>
+<input type="text" id="lang_com" value="">
+</p>
+
+
+
+<br><br>
+
+<button type="button" id="lgsubmit">Submit</button>
+    </div>
+</div>
+
+
+<div class="slide" id="finish" style="display: none;">
+<p>You're done with the experiment. Thanks so much for participating!</p>
+</div>
+
+<script src="./files/pilot.js"></script>
+
+</body></html>
