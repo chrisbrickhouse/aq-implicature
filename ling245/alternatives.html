@@ -9,122 +9,12 @@
 <script src="./files/jquery-ui.js"></script>
 
 <link rel="stylesheet" href="./files/jquery-ui.css">
-
-
-
-<style>
-
-body {
-    font-family: serif;
-    font-size: 120%;
-    color: black;
-    min-width: 980px;
-    background: #fffff2  }
-
-div {
-    background: #fffff2;
-    padding: 4px 4px 4px 4px;
-    text-align: center;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border-radius: 4px;
-}
-
-div div {
-    background: white;
-    padding: 4px 4px 4px 4px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    border: 1px solid black;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    /*border-radius: 5px;*/
-}
-
-label {
-    display: block;
-}
-
-.responseText{
-    background: white;
-    padding: 4px 4px 4px 4px;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px transparent;
-}
-
-.leftLabel {
-    float: left;
-    font-size: 80%;
-    font-weight: bold;
-    color: #8C1515;
-}
-
-.rightLabel {
-    float: right;
-    font-size: 80%;
-    font-weight: bold;
-    color: #8C1515;
-}
-
-.centerLabel {
-    float: center;
-    font-size: 80%;
-    font-weight: bold;
-    color: black;
-}
-
-.block-text {
-  width: 500px;
-  text-align: justify;
-  margin: 0 auto;
-  margin-bottom: 1em;
-}
-
-.questionSent {
-    margin-left: 20px;
-    margin-right: 20px;
-    /*text-indent: 20px;*/
-    text-align: left;
-}
-
-.optional {
-    text-indent: 20px;
-    text-align: left;
-}
-
-.sliders {
-        padding-bottom: 0px;
-        padding-top: 0px;
-        margin: 5px auto;
-    }
-
-</style></head>
-
-
-
-<!-- inline CSS style for now -->
-
-
-
-
+<link rel="stylesheet" href="./files/experiment.css">
+</head>
 
 <!-- main html body -->
 
-<body style="">
+<body>
 
 <div class="slide" id="intro" style="display: block;">
     <div>
@@ -139,7 +29,7 @@ label {
 
 <p class="block-text">You will be paid for your participation at the posted rate.</p>
 
-<p class="block-text">If you have read this form and have decided to participate in this experiment, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. You have the right to refuse to do particular tasks. Your individual privacy will be maintained in all published and written data resulting from the study.   You may print this form for your records.</p>
+<p class="block-text">If you have read this form and have decided to participate in this experiment, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. You have the right to refuse to do particular tasks. Your individual privacy will be maintained in all published and written data resulting from the study. You may print this form for your records.</p>
 
 <p class="block-text"><strong>CONTACT INFORMATION:</strong><br />If you have any questions, concerns or complaints about this research study, its procedures, risks and benefits, you should contact one of the Protocol Director Penelope Eckert (650)-725-1564</p>
 
@@ -162,11 +52,9 @@ label {
     <div>
 
 <br><br>
-<p class="block-text">In this experiment, you will be listening to 1 sound file.<br />
-    <br />
-    You will be asked to listen to the audio and answer a short question.<br />
-    <br />
-    You may play the audio as many times as you like to help in this.
+<p class="block-text">
+  DIRECTIONS GO HERE<br /><br />
+  Should probably also include native speaker box here instead of in the next slide.
 </p>
 <br><br>
 <button type="button" id="gotoCheck">Proceed to instructions</button>
@@ -175,22 +63,16 @@ label {
 
 <div class="slide" id="audioCheck" style="display: none;">
     <div>
-
-<p class="block-text"> This experiment requires you to listen to and judge audio speech:</p>
-<p class="block-text">1: <strong>Please make sure that you have a functioning headset</strong>, and please check that your speaker volume is set to a comfortable level by clicking on the sample audio file below. We will check to make sure that you have played and listened to the audio in the main experiment, as this is crucial to our experiment.</p>
-
-<p class="block-text">2: <strong>You must be a native speaker of American English to participate in this study.</strong> To proceed, please check the boxes below to ensure that you meet both requirements, and then click on the button, " Start experiment ". </p>
-
-<p class="block-text">Note: This is a perception experiment requiring undivided attention from you. Please devote your attention solely to this task. Thanks for your participation!</p>
-
-<span style="font-weight: bold; color: #8C1515;"> Test Sound </span>
-<br>
-<button type="button" onclick="document.getElementById('sampleAudio').play()">Play test sound</button>
+      <p class="block-text">
+        2: <strong>You must be a native speaker of American English to participate in this study.</strong> To proceed, please check the boxes below to ensure that you meet both requirements, and then click on the button, " Start experiment ".
+      </p>
+      <p class="block-text">
+        Note: This is a perception experiment requiring undivided attention from you. Please devote your attention solely to this task. Thanks for your participation!
+      </p>
 <audio id="sampleAudio" style="display: none;" src="http://stanford.edu/~sunwooj/experiments/dec1/stimuli/sample.wav" src="#" type="audio/wav"></audio>
 <br><br>
 <form class="questionSent">
   <input type="checkbox" id="native" name="native" value="1"> I am a native speaker of American English. <br>
-  <input type="checkbox" id="speaker" name="speaker" value="1"> I have a functioning headphone and an audio system that can play sound files. <br>
 </form>
 
 <br><br>
@@ -207,7 +89,7 @@ label {
 <!-- Main experiment starts here -->
 <div class="slide" id="freeResponse" style="display: none;">
     <div>
-        <div style="border-width:0px;">
+        <div class="nb">
 
 <!-- Audio stimuli displayed here -->
 <br>
@@ -228,16 +110,14 @@ label {
 
 <!-- Q1: Free Response -->
 <form id="responseForm0">
-<div style="border-width:0px;">
-<p class="block-text">Often we can get impressions of people just by hearing them say a few words.
-  <br /><br />Please listen to the following words and provide three attributes that describe the talker.
-  <br /><br />You may play it as many times as you like.</p>
-</div>
-<button type="button" id="playaudio">Play</button>
+<p class="block-text">In a recent restaurant review someone said they thought the food was <span id="scalar_target1">NULL</span>.<br />
+<br />
+If they'd felt differently about the food, what other words could they have used instead of <span id="scalar_target2">NULL</span>?<br />
+<br />
+Please list at least three options below.</p>
 <br />
 <br />
-<textarea id="speakerPerception" rows="8" cols="60" placeholder="Please type your response here..."></textarea>
-</p>
+<textarea id="speakerPerception" rows="8" cols="60" placeholder="Please list three options here..."></textarea>
 
 <button type="button" id="veributton">Next</button>
 
@@ -332,6 +212,6 @@ Therefore, although the questionnaire below is optional, we would greatly apprec
 <p>You're done with the experiment. Thanks so much for participating!</p>
 </div>
 
-<script src="./files/pilot.js"></script>
+<script src="./files/alternatives.js"></script>
 
 </body></html>
