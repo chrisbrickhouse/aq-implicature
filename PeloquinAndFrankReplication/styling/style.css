@@ -120,3 +120,33 @@ input[type=text] {
 	border-radius: 0;
 	-webkit-appearance: none;
 }
+
+#AQtable {
+	margin: auto auto;
+	table-layout: fixed;
+}
+
+th.head {
+	font-weight: normal;
+	padding: 3px;
+	text-align: center;
+	border: 1px solid black;
+	background: #b6b1a9;
+}
+
+td.prompt {
+	text-align: left;
+	width: 450px;
+	border: 1px solid black;
+	padding: 6px;
+}
+
+td.blank {
+	border:medium none;
+	content:'';
+	background:transparent;
+}
+
+td.response {
+	border: 1px solid black;
+}

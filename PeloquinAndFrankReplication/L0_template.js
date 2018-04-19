@@ -52,6 +52,24 @@ function shuffle (a) {
 	return o;
 }
 
+function scoreAQ() {
+	var i;
+	var j;
+	var aq_list = []
+	for (i=1; i<=50 ; i++) {
+		radios = document.getElementsByName('AQ'+i.toString());
+		for (j=0, length=radios.length; j < length; j++ ) {
+			if (radios[j].checked) {
+				aq_list[i-1] = radios[j].value;
+				break
+			}
+		}
+	}
+	console.log(aq_list);
+	experiment.data.aq = aq_list
+	showSlide('debriefing');
+}
+
 // Experiment
 // ----------
 var DOMAIN = "movie"; // Change this between expt's
@@ -135,7 +153,8 @@ var experiment = {
 		expt_aim: [],
 		expt_gen: [],
 		age: [],
-		gender:[]
+		gender:[],
+		aq: []
     },
 
     // End the experiment
