@@ -41,7 +41,7 @@ input[type="radio"] {
 }
 
 button {
-	background: url(./images/button-gradient.png);
+	background: url(../images/button-gradient.png);
 	border: 1px solid #999;
 	border-top: 1px solid #e0e0e0;
 	border-left: 1px solid #e0e0e0;
