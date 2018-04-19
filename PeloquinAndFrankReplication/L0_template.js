@@ -39,7 +39,7 @@ Array.prototype.random = function() {
 
 // shuffle function - from stackoverflow?
 // shuffle ordering of argument array -- are we missing a parenthesis?
-function shuffle (a) { 
+function shuffle (a) {
 	var o = [];
 
 	for (var i=0; i < a.length; i++) {
@@ -48,7 +48,7 @@ function shuffle (a) {
 
 	for (var j, x, i = o.length;
 	 i;
-	 j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);	
+	 j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
 	return o;
 }
 
@@ -60,6 +60,7 @@ var NUM_STARS = 5;
 var NUM_TRAINING_TRIALS = 2;
 var NUM_NON_TRAINING_TRIALS = NUM_ITEMS * NUM_STARS;
 var TOTAL_TRIALS = NUM_TRAINING_TRIALS + NUM_NON_TRAINING_TRIALS;
+console.log(TOTAL_TRIALS)
 var training_stimuli = ["high", "low"];
 var verbs = 	[
 				"loved",
@@ -136,7 +137,7 @@ var experiment = {
 		age: [],
 		gender:[]
     },
-    
+
     // End the experiment
     end: function() {
 		showSlide("finished");
@@ -150,18 +151,18 @@ var experiment = {
 		var response_logged = false;
 		//Array of radio buttons
 		var radio = document.getElementsByName("judgment");
-		
+
 		// Loop through radio buttons
 		for (i = 0; i < radio.length; i++) {
 		    if (radio[i].checked) {
 				experiment.data.judgment.push(radio[i].value); // log response
-				response_logged = true;		    
+				response_logged = true;
 		    }
 		}
-		
+
 		if (response_logged) {
 		    nextButton.blur();
-		    
+
 		    // Uncheck radio buttons
 		    for (i = 0; i < radio.length; i++) {
 				radio[i].checked = false
@@ -169,8 +170,8 @@ var experiment = {
 		    experiment.next(); //Move to next condition
 		} else {
 			// Else respondent didn't make a response
-		    $("#testMessage").html('<font color="red">' + 
-					   'Please make a response!' + 
+		    $("#testMessage").html('<font color="red">' +
+					   'Please make a response!' +
 					   '</font>');
 		}
 	},
@@ -183,10 +184,10 @@ var experiment = {
 		// Allow experiment to start if it's a turk worker OR if it's a test run
 		if (window.self == window.top || turk.workerId.length > 0) {
 		    // Clear the test message and adjust progress bar
-		    $("#testMessage").html('');  
+		    $("#testMessage").html('');
 		    $("#prog").attr("style","width:" +
 				    String(100 * ((TOTAL_TRIALS - trials.length)/TOTAL_TRIALS)) + "%");
-		    
+
 		    // Training trials
 		    if(trials.length > TOTAL_TRIALS - NUM_TRAINING_TRIALS) {
 		    	// First training trial
@@ -199,8 +200,8 @@ var experiment = {
 			    	current_trial_num = trials.shift();		// "low"
 			    	current_scalar = all_stimuli.shift();	// remove "low"
 			    	current_star = "20";
-		    	} 
-		    } 
+		    	}
+		    }
 		    // Actual trials
 		    else if (trials.length == TOTAL_TRIALS - training_stimuli.length) {
 		    	trials = shuffle(trials); // Randomize remaining trials here (only once)
@@ -222,7 +223,7 @@ var experiment = {
 		    // Log data
 		    experiment.data.item.push(current_scalar);
 		    experiment.data.stars.push(current_star);
-		    
+
 		    showSlide("stage");
 		}
     },
@@ -235,7 +236,7 @@ var experiment = {
     	for (i = 18; i <= 100; i++) {
     		select_age += '<option val=' + i + '>' + i + '</option>';
     	}
-    	$('#age').html(select_age);    	
+    	$('#age').html(select_age);
     },
 
     // Log debrief data
