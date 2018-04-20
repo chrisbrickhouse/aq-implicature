@@ -67,7 +67,7 @@ function scoreAQ() {
 	}
 	console.log(aq_list);
 	experiment.data.aq = aq_list
-	showSlide('debriefing');
+	experiment.debriefing()
 }
 
 // Experiment
@@ -197,8 +197,10 @@ var experiment = {
     // Go to next trial
     next: function() {
     	// If no trials are left go to debriefing
-		if (!trials.length) {
-			return experiment.debriefing();
+		//if (!trials.length) {
+		if (!trials.length) { //testing purposes
+			showSlide('AQ');
+			return;
 		}
 		// Allow experiment to start if it's a turk worker OR if it's a test run
 		if (window.self == window.top || turk.workerId.length > 0) {

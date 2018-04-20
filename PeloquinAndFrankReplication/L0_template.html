@@ -107,7 +107,7 @@
     <table align="center"><tr>
       <td align="center">
       	<button type="button" id="nextButton" onClick="experiment.log_response()"> next</button>
-        <button type="button" id="nextButton" onclick="showSlide('AQ');">SKIP</button><!-- REMOVE BEFORE EXP-->
+        <!--<button type="button" onclick="showSlide('AQ');">SKIP</button><! TESTING-->
       </td>
       <tr>
         <td align="center">
@@ -120,6 +120,18 @@
     <!-- AQ Slide -->
     <!-- ======== -->
     <div class="slide" id="AQ">
+      <div align="center">
+        <p>
+          We are also interested in the way personality affects how people interpret star ratings.<br />
+          <br />
+          In this next section, you will read 50 statements, 10 at a time. For each statement, select how much you agree or disagree with the statement.<br />
+          <br />
+          Try not to overthink your responses. Your first reaction is best.
+        </p>
+        <button type="button" onclick="showSlide('AQ1');">Next</button>
+      </div>
+    </div>
+    <div class="slide" id="AQ1">
       <div align="center">
       <p>We are also interested in the ways personality affects these judgements. To help us get a better sense of this please fill out the survey below.</p>
       <table class="AQ" id="AQtable">
