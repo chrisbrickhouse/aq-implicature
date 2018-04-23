@@ -83,27 +83,26 @@ var training_stimuli = ["high", "low"];
 var verbs = 	[
 				"loved",
 				"liked",
-				"tolerated",
+				"felt indifferent about",
 				"disliked",
 				"hated"
 				];
 var non_verbs = [
-				"great",
+				"excellent",
 				"good",
 				"okay",
 				"bad",
-				"terrible",
-				"excellent",
-				"average",
+				"horrible",
 				"unforgettable",
 				"memorable",
 				"ordinary",
-				"boring",
+				"bland",
 				"forgettable",
-				"special",
-				"unique",
-				"common",
-				"different"
+				"delicious",
+				"palatable",
+				"mediocre",
+				"gross",
+				"disgusting"
 				];
 function verb_sent(target_scalar, domain) {
 	return "<b>" + target_scalar + "</b> the " + domain + "?";
