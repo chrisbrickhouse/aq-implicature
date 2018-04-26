@@ -602,7 +602,7 @@
        <td class="response"><input type="radio" name="AQ50" value="DD"></td>
      </tr>
    </table>
-   <button type="button" onclick="scoreAQ();">SCORE</button>
+   <button type="button" onclick="recordAQ();">Next</button>
    </div>
  </div>
  </div>
@@ -634,11 +634,26 @@
     <!-- Age -->
     <p> And what is your age?</p>
     <select id="age"></select>
+
     <div align="center">
-      <button type="button" id="debriefsubmit" onClick="experiment.submit_comments()">Submit</button>
+      <p class="block-text">If you would like to see the results of the personality test, click the button labeled "See results". Once you are done viewing the results, or if you do not want to see the results, click the button labeled "Finish HIT".
+    </div>
+
+    <div align="center">
+      <button type="button" id="viewAQ" onClick="showAQ();">See results</button>
+      <button type="button" id="debriefsubmit" onClick="experiment.submit_comments()">Finish HIT</button>
     </div>
 
 	</form>
+  <div align="center" id="AQdisplay" style="display: none;">
+    <p class="block-text">
+      Scores on this test can be between 0 and 50, with most people scoring around 16, and rarely above 30.<br />
+      <br />
+      Scores closer to 0 show that you are more adept at social skills and multi-tasking.<br />
+      Scores closer to 50 show that you pay closer attention to details and are more at home in routines.<br />
+      <br />
+      Your score was <span id="displayAQscore"></span>
+  </div>
 	</div>
  </div>
 
@@ -648,6 +663,7 @@
 </div>
 
 <script src="implicatures_e12.js"></script>
+<script src="AQ.js"></script>
 
 </body>
 </html>

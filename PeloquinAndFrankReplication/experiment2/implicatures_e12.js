@@ -48,8 +48,8 @@ function shuffle (a) {
 	return o;
 }
 
-// Autism Spectrum Quotient scoring
-function scoreAQ() {
+// Autism Spectrum Quotient recording
+function recordAQ() {
 	var i;
 	var j;
 	var aq_list = []
@@ -70,6 +70,39 @@ function scoreAQ() {
 function AQprogress(n) {
 	$("#AQprog").attr("style","width:" +
 			String(100 * ((TOTAL_TRIALS + NUM_AQ_SLIDES - n)/(TOTAL_TRIALS+NUM_AQ_SLIDES))) + "%");
+}
+
+function scoreAQ(arr) {
+  var AQ = 0
+  if (arr.length != 50) {
+    throw "Not all questions answered"
+  }
+  for (var i = 0; i < 50; ++i) {
+    if (typeof arr[i] == "undefined") {
+      throw "Not all questions answered"
+    }
+    // Indices where an agree response scores 1 (per Baron-Cohen), or 3/4 (per Austin)
+    var agree_scores = [1,2,4,5,6,7,9,12,13,16,18,19,20,21,22,23,26,33,35,39,41,42,43,45,46]
+    // Indices where an agree response scores 0 (per Baron-Cohen), or 2/1 (per Austin)
+    var disagree_scores = [3,8,10,11,14,15,17,24,25,27,28,29,30,31,32,34,36,37,38,40,44,47,48,49,50]
+    if (agree_scores.indexOf(i) >= 0) {
+      if (['DA','SA'].indexOf(arr[i]) >= 0) {
+        AQ += 1
+      }
+    } else if (disagree_scores.indexOf(i) >= 0) {
+      if (['DD','SD'].indexOf(arr[i]) >= 0) {
+        AQ += 1
+      }
+    }
+  }
+	return AQ
+}
+
+function showAQ() {
+	var aq_data = experiment.data.aq
+	var AQ = scoreAQ(aq_data)
+	$('#displayAQscore').html(AQ)
+	$('#AQdisplay').show;
 }
 
 // Target scalar items
