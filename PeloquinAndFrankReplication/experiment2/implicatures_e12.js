@@ -12,6 +12,11 @@ function showSlide(id) {
 	$("#"+id).show();
 }
 
+function showSubSlide(id) {
+	$(".subslide").hide();
+	$("#"+id).show();
+}
+
 // Get random integers.
 // When called with no arguments, it returns either 0 or 1. When called with one argument, *a*, it returns a number in {*0, 1, ..., a-1*}. When called with two arguments, *a* and *b*, returns a random value in {*a*, *a + 1*, ... , *b*}.
 function random(a,b) {
@@ -30,7 +35,7 @@ Array.prototype.random = function() {
 
 // shuffle function - from stackoverflow?
 // shuffle ordering of argument array -- are we missing a parenthesis?
-function shuffle (a) { 
+function shuffle (a) {
 	var o = [];
 
 	for (var i=0; i < a.length; i++) {
@@ -39,10 +44,33 @@ function shuffle (a) {
 
 	for (var j, x, i = o.length;
 	 i;
-	 j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);	
+	 j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
 	return o;
 }
 
+// Autism Spectrum Quotient scoring
+function scoreAQ() {
+	var i;
+	var j;
+	var aq_list = []
+	for (i=1; i<=50 ; i++) {
+		radios = document.getElementsByName('AQ'+i.toString());
+		for (j=0, length=radios.length; j < length; j++ ) {
+			if (radios[j].checked) {
+				aq_list[i-1] = radios[j].value;
+				break
+			}
+		}
+	}
+	console.log(aq_list);
+	experiment.data.aq = aq_list
+	experiment.debriefing()
+}
+
+function AQprogress(n) {
+	$("#AQprog").attr("style","width:" +
+			String(100 * ((TOTAL_TRIALS + NUM_AQ_SLIDES - n)/(TOTAL_TRIALS+NUM_AQ_SLIDES))) + "%");
+}
 
 // Target scalar items
 // -------------------
@@ -54,7 +82,7 @@ var sents = {
 		    low1:  "thought the food deserved a <b>low</b> rating?"
 		    //low2:  "thought the food deserved a <b>very low</b> rating?"
 		},
-		liked_loved: {		   
+		liked_loved: {
 		    hi1:  "<b>loved</b> the food?",
 		    hi2:  "<b>liked</b> the food?",
 		    mid: "<b>felt indifferent about</b> the food",
@@ -98,8 +126,10 @@ var NUM_DEGREES = 5
 var NUM_SCALES = 5
 var NUM_STARS = 5
 var NUM_TRAINING_TRIALS = 2
-// 5 scales * 5 rating levels * 5 manipulation levels + 2 training trials
+var NUM_AQ_SLIDES = 6
+// 5 scales * 5 rating levels * 5 manipulation levels + 2 training trials + 5 AQ slides = 132
 var TOTAL_TRIALS = NUM_SCALES * NUM_STARS * NUM_DEGREES + NUM_TRAINING_TRIALS;
+console.log(TOTAL_TRIALS)
 
 var scales = Object.keys(sents.scale);
 var scale_degrees = ["hi1", "hi2", "mid","low1", "low2"];
@@ -126,7 +156,7 @@ var experiment = {
 		age: [],
 		gender:[]
     },
-    
+
     // End experiment
     end: function() {
 		showSlide("finished");
@@ -140,18 +170,18 @@ var experiment = {
 		var response_logged = false;
 		// Array of radio buttons
 		var radio = document.getElementsByName("judgment");
-		
+
 		// Loop through radio buttons
 		for (i = 0; i < radio.length; i++) {
 		    if (radio[i].checked) {
 				experiment.data.judgment.push(radio[i].value);
-				response_logged = true;		    
+				response_logged = true;
 		    }
 		}
-		
+
 		if (response_logged) {
 		    nextButton.blur();
-		    
+
 		    // Uncheck radio buttons
 		    for (i = 0; i < radio.length; i++) {
 				radio[i].checked = false
@@ -159,26 +189,29 @@ var experiment = {
 		    experiment.next(); // Move to next condition
 		} else {
 			// Else respondent didn't make a response
-		    $("#testMessage").html('<font color="red">' + 
-					   'Please make a response!' + 
+		    $("#testMessage").html('<font color="red">' +
+					   'Please make a response!' +
 					   '</font>');
 		}
 	},
-    
+
     // Run every trial
     next: function() {
     	// If no trials are left go to debriefing
 		if (!trials.length) {
-			return experiment.debriefing();
+			AQprogress(NUM_AQ_SLIDES);
+			showSlide('AQ');
+			showSubSlide('AQsub');
+			return;
 		}
-		
+
 		// Allow experiment to start if it's a turk worker OR if it's a test run
 		if (window.self == window.top || turk.workerId.length > 0) {
 		    // Clear the test message and adjust progress bar
-		    $("#testMessage").html('');  
+		    $("#testMessage").html('');
 		    $("#prog").attr("style","width:" +
-				    String(100 * ((TOTAL_TRIALS - trials.length)/TOTAL_TRIALS)) + "%");
-		    
+				    String(100 * ((TOTAL_TRIALS - trials.length)/(TOTAL_TRIALS+NUM_AQ_SLIDES))) + "%");
+
 		    // Check for training runs
 		    if(trials.length > TOTAL_TRIALS - NUM_TRAINING_TRIALS) {
 		    	// training #1: 'hi2' == "high" with 5 stars (expect 'Yes' resopnse)
@@ -194,10 +227,10 @@ var experiment = {
 			    	current_scale = scales[0];
 			    	degree = "low1";
 			    	manipulation_level = "20";
-		    	} 
+		    	}
 		    } else {
 		    	if (trials.length == TOTAL_TRIALS - 2) { // TOTAL_TRIALS - 2 == 125
-		    		trials = shuffle(trials); 
+		    		trials = shuffle(trials);
 		    	}
 		    	current_trial = trials.shift();
 		   		current_scale_num = Math.floor(current_trial / 25)		// Get scale range (1 - 5)
@@ -224,7 +257,7 @@ var experiment = {
 		    experiment.data.scale.push(current_scale);
 		    experiment.data.degree.push(degree);
 		    experiment.data.manipulation_level.push(manipulation_level);
-		    
+
 		    showSlide("stage");
 		}
     },
@@ -237,7 +270,7 @@ var experiment = {
     	for (i = 18; i <= 100; i++) {
     		select_age += '<option val=' + i + '>' + i + '</option>';
     	}
-    	$('#age').html(select_age);    	
+    	$('#age').html(select_age);
     },
 
     // Log data

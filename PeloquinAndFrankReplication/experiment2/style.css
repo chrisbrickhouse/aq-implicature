@@ -12,7 +12,7 @@ body {
 }
 
 /* We manage display using "slides". A slide is a <code>div</code> that takes up the entire page. Only one slide should be visible at a time. Navigation between slides is most sensibly accomplished using using buttons, rather than keyboard events. */
-.slide {
+.slide .subslide{
 	width: 95%;
 	height: 90%;
 	display: none;
@@ -149,4 +149,14 @@ td.blank {
 
 td.response {
 	border: 1px solid black;
+}
+
+.progress {
+	margin: 5% 5%;
+}
+
+.pad {
+	width: 70%;
+	margin: auto auto;
+	margin-top: 5%;
 }
