@@ -102,7 +102,7 @@ function showAQ() {
 	var aq_data = experiment.data.aq
 	var AQ = scoreAQ(aq_data)
 	$('#displayAQscore').html(AQ)
-	$('#AQdisplay').show;
+	$('#AQdisplay').show();
 }
 
 // Target scalar items
@@ -160,7 +160,7 @@ var NUM_SCALES = 5
 var NUM_STARS = 5
 var NUM_TRAINING_TRIALS = 2
 var NUM_AQ_SLIDES = 6
-// 5 scales * 5 rating levels * 5 manipulation levels + 2 training trials + 5 AQ slides = 132
+// 5 scales * 5 rating levels * 5 manipulation levels + 2 training trials
 var TOTAL_TRIALS = NUM_SCALES * NUM_STARS * NUM_DEGREES + NUM_TRAINING_TRIALS;
 console.log(TOTAL_TRIALS)
 
