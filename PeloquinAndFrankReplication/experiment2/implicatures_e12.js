@@ -100,9 +100,17 @@ function scoreAQ(arr) {
 
 function showAQ() {
 	var aq_data = experiment.data.aq
-	var AQ = scoreAQ(aq_data)
-	$('#displayAQscore').html(AQ)
-	$('#AQdisplay').show();
+	try {
+		var AQ = scoreAQ(aq_data)
+		$('#displayAQscore').html(AQ)
+		$('#AQdisplay').show();
+	}
+	catch(err) {
+		$('#AQdisplay').html('<p class="block-text">Not all questions were \
+answered so a score could not be computed. Please click the button labeled \
+"Finish HIT" to complete the experiment and receive compensation.</p>');
+		$('#AQdisplay').show();
+	}
 }
 
 // Target scalar items
