@@ -160,3 +160,11 @@ td.response {
 	margin: auto auto;
 	margin-top: 5%;
 }
+
+.aq-results {
+	width: 500px;
+  text-align: center;
+	font-size: large;
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
