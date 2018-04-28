@@ -57,3 +57,6 @@ This repository contains files related to my first Qualifying Paper on the relat
   * AQ descriptive stats: Mean = 102 (of 200), Range = 71-150, SD = 14.5
 
 * Stiller, A., Goodman, N., & Frank, M. (2015). Ad-hoc Implicature in Preschool Children. *Language Learning and Development, 11*, 176-190.
+
+### Random Notes
+* Find Horn 1972, 1979 and conventional contrast; see how they may be useful in stimuli design or write-up.
