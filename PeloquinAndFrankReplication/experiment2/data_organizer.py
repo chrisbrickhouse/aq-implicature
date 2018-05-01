@@ -161,6 +161,9 @@ def scoreAQ(responses):
             elif responses[i] == 'DD':
                 baroncohen_score += 0
                 austin_score += 1
+            elif responses[i] is None:
+                baroncohen_score += 0.01
+                austin_score += 0.01
             else:
                 raise ValueError(f'Unknown AQ response {responses[i]}')
         elif i+1 in disagree_scores:
@@ -176,6 +179,9 @@ def scoreAQ(responses):
             elif responses[i] == 'DD':
                 baroncohen_score += 1
                 austin_score += 4
+            elif responses[i] is None:
+                baroncohen_score += 0.01
+                austin_score += 0.01
             else:
                 raise ValueError(f'Unknown AQ response {responses[i]}')
     return(baroncohen_score,austin_score)
