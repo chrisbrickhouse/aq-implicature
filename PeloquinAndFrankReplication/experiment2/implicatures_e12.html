@@ -11,6 +11,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="style.css" />
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- Unique Turker -->
+<script src="//uniqueturker.myleott.com/lib.js" type="text/javascript"></script>
+<script type="text/javascript">
+(function(){
+    var ut_id = "8378583280995611d39d5f80c326f187";
+    if (UTWorkerLimitReached(ut_id)) {
+        document.getElementById('mturk_form').style.display = 'none';
+        document.getElementsByTagName('body')[0].innerHTML = "You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT' to avoid any impact on your approval rating.";
+    }
+})();
+</script>
 <!--Star-ratings-->
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link href="star-rating.css" media="all" rel="stylesheet" type="text/css" />
@@ -28,7 +39,9 @@
   <p id='logo-text'>Stanford Department of Linguistics</p>
   <p class="block-text">In this task, you're going to help us understand what people really mean by their star ratings. We've anonymized all the ratings so you'll see a sentence like "When rating the food someone selected:" and then you'll see the ratings they gave. We'd like to know how much you agree with how particular descriptions fit those ratings. If you think the description fits exactly select "7 - Yes, definitely". If the description doesn't fit at all, select "1 - No, not at all." If you feel like it's somewhere in between these options, choose a number between 1 and 7.<br />
   <br />
-  You will then be asked to take a brief personality quiz. If you would like, the results can be shown to you at the end of the experiment.
+  You will then be asked to take a brief personality quiz. If you would like, the results can be shown to you at the end of the experiment.<br />
+  <br />
+  The HIT should take aabout 20 minutes to complete.
 </p><br />
 <button type="button" onclick="showSlide('consent')">Start</button>
 </div>
