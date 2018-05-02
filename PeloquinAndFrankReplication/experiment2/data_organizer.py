@@ -80,13 +80,13 @@ def get_word(scale,degree):
     else:
         raise ValueError(f'Unknown scale {scale}')
     return(word)
-            
+
 def scoreAQ(responses):
     # Sanity check for all 50 responses
     if len(responses) != 50:
         return(None,None)
-    # Indices where an agree response scores 
-    #    1 (per Baron-Cohen) or 
+    # Indices where an agree response scores
+    #    1 (per Baron-Cohen) or
     #    3/4 (per Austin)
     agree_scores = [
         1,
@@ -116,7 +116,7 @@ def scoreAQ(responses):
         46
     ]
     # Indices where an agree response scores
-    #    0 (per Baron-Cohen) or 
+    #    0 (per Baron-Cohen) or
     #    2/1 (per Austin)
     disagree_scores = [
         3,
@@ -196,7 +196,7 @@ with open(fname,'r') as f:
     for line in f.readlines():
         l = line.strip().split('\t')
         results.append(l)
-        
+
 WORKER_COL = 19
 DATA_COL = 29
 TIME_ACCEPTED_COL = 22
@@ -216,7 +216,8 @@ data_structure = [
         'gender',
         'native_language',
         'expt_aim',
-        'comments'
+        'comments',
+        'duration'
     ] + ['AQ'+str(x+1) for x in range(50)]
 ]
 for row in results[1:]:
@@ -231,7 +232,7 @@ for row in results[1:]:
     ts_str = row[TIME_SUBMITTED_COL].strip('"')
     # Parsing the MTurk time format
     #
-    #   Fri Apr 27 11:15:30 PDT 2018 
+    #   Fri Apr 27 11:15:30 PDT 2018
     #   %a  %b  %d %H:%M:%S %Z  %Y
     time_accepted = datetime.strptime(ta_str,'%a %b %d %H:%M:%S %Z %Y')
     time_submitted = datetime.strptime(ts_str,'%a %b %d %H:%M:%S %Z %Y')
@@ -241,12 +242,12 @@ for row in results[1:]:
     #######################################
     participant_data['worker_id'] = row[WORKER_COL].strip('"')
     participant_data['time_taken'] = str(time_taken)
-    
+
     # Get AQ scores, both Baron-Cohen and Austin
     ############################################
     aq_responses = participant_data['aq']
     aq_bc_score, aq_a_score = scoreAQ(aq_responses)
-    
+
     # Get non-trial related data
     ############################
     native_lang = participant_data['language'][0]
@@ -255,7 +256,7 @@ for row in results[1:]:
     age = participant_data['age'][0]
     gender = participant_data['gender'][0]
     workerid = participant_data['worker_id']
-    
+
     # Get trial data and make a row for each
     ########################################
     for i in range(len(participant_data['scale'])):
@@ -277,7 +278,8 @@ for row in results[1:]:
             gender,
             native_lang,
             expt_aim,
-            expt_gen
+            expt_gen,
+            time_taken
         ] + aq_responses
         data_structure.append(struct_row)
 
