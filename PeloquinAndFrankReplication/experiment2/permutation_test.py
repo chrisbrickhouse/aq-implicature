@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import os
 import csv
 import json
 import math
@@ -192,7 +193,8 @@ WORKER_COL = 19
 DATA_COL = 29
 PERMUTATION_N = 1000
 Z_CRIT = 1.95
-ifile = 'pandflive.results'
+print('### Comparison of High and Low AQ Groups ###')
+ifile = 'pandflive_full.results'
 raw_data = []
 with open(ifile,'r') as f:
     for line in f.readlines():
@@ -236,6 +238,8 @@ for _ in range(PERMUTATION_N):
                 data_arrays[s][d][m].append(permuted_data[s][d][m])
 
 z_data = {}
+n_sig = 0
+n_tested = 0
 for s in data_arrays:
     if s == 'training1':
         continue
@@ -245,6 +249,7 @@ for s in data_arrays:
         if d not in z_data[s]:
             z_data[s][d] = {}
         for m in data_arrays[s][d]:
+            n_tested += 1
             mu = statistics.mean(data_arrays[s][d][m])
             std = statistics.stdev(data_arrays[s][d][m])
             x = test_value[s][d][m]
@@ -254,4 +259,74 @@ for s in data_arrays:
                 z = 0
             z_data[s][d][m]=z
             if z > Z_CRIT or z < -Z_CRIT:
+                n_sig +=1
                 print(s,d,m,z)
+print(f'### {n_sig} significant results of {n_tested}')
+print('######')
+print('### Comparison with Original Study Data ###')
+
+PF_OG_DATA_PATH = "/home/cj/Desktop/scalar_implicature/production-results/e12-anonymized-results"
+file_list = os.listdir(PF_OG_DATA_PATH)
+# Read data into memory
+#######################
+results = []
+for fname in file_list:
+    if '.json' not in fname:
+        continue
+    with open(PF_OG_DATA_PATH+'/'+fname,'r') as f:
+        try:
+            results.append(json.loads(f.read()))
+        except:
+            print(fname)
+
+og_data = {}
+for participant in results:
+    wid = participant['WorkerId']
+    og_data[wid] = participant['answers']['data']
+
+test_value = compare_groups(p_data,og_data)
+data_arrays = {}
+for s in test_value:
+    if s not in data_arrays:
+        data_arrays[s] = {}
+    for d in test_value[s]:
+        if d not in data_arrays[s]:
+            data_arrays[s][d] = {}
+        for m in test_value[s][d]:
+            if m not in data_arrays[s][d]:
+                data_arrays[s][d][m] = []
+a = [wid for wid in p_data]
+b = [wid for wid in og_data]
+for _ in range(PERMUTATION_N):
+    a,b = swap(a,b)
+    permuted_data = compare_groups(a,b,p_data)
+    for s in permuted_data:
+        for d in permuted_data[s]:
+            for m in permuted_data[s][d]:
+                data_arrays[s][d][m].append(permuted_data[s][d][m])
+
+z_data = {}
+n_sig = 0
+n_tested = 0
+for s in data_arrays:
+    if s == 'training1':
+        continue
+    if s not in z_data:
+        z_data[s] = {}
+    for d in data_arrays[s]:
+        if d not in z_data[s]:
+            z_data[s][d] = {}
+        for m in data_arrays[s][d]:
+            n_tested += 1
+            mu = statistics.mean(data_arrays[s][d][m])
+            std = statistics.stdev(data_arrays[s][d][m])
+            x = test_value[s][d][m]
+            try:
+                z = (x-mu)/std
+            except ZeroDivisionError:
+                z = 0
+            z_data[s][d][m]=z
+            if z > Z_CRIT or z < -Z_CRIT:
+                n_sig +=1
+                print(s,d,m,z)
+print(f'### {n_sig} significant results of {n_tested}')
