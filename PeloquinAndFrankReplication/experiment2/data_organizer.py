@@ -147,6 +147,7 @@ def scoreAQ(responses):
     ]
     baroncohen_score = 0
     austin_score = 0
+    not_answered = 0
     for i in range(len(responses)):
         if i+1 in agree_scores:
             if responses[i] == 'DA':
@@ -162,8 +163,7 @@ def scoreAQ(responses):
                 baroncohen_score += 0
                 austin_score += 1
             elif responses[i] is None:
-                baroncohen_score += 0.01
-                austin_score += 0.01
+                not_answered += 1
             else:
                 raise ValueError(f'Unknown AQ response {responses[i]}')
         elif i+1 in disagree_scores:
@@ -180,11 +180,10 @@ def scoreAQ(responses):
                 baroncohen_score += 1
                 austin_score += 4
             elif responses[i] is None:
-                baroncohen_score += 0.01
-                austin_score += 0.01
+                not_answered += 1
             else:
                 raise ValueError(f'Unknown AQ response {responses[i]}')
-    return(baroncohen_score,austin_score)
+    return(baroncohen_score,austin_score,not_answered)
 
 # Results file
 fname = 'pandfexp.results'
@@ -212,6 +211,7 @@ data_structure = [
         'word',
         'austin_aq',
         'baroncohen_aq',
+        'not_answered'
         'age',
         'gender',
         'native_language',
@@ -246,7 +246,7 @@ for row in results[1:]:
     # Get AQ scores, both Baron-Cohen and Austin
     ############################################
     aq_responses = participant_data['aq']
-    aq_bc_score, aq_a_score = scoreAQ(aq_responses)
+    aq_bc_score, aq_a_score, aq_na = scoreAQ(aq_responses)
 
     # Get non-trial related data
     ############################
@@ -274,6 +274,7 @@ for row in results[1:]:
             word,
             aq_a_score,
             aq_bc_score,
+            aq_na,
             age,
             gender,
             native_lang,

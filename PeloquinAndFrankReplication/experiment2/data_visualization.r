@@ -14,13 +14,17 @@ PFdata = read.table(data_file,header=T,sep=",",quote="")
 og_data_file <- "/home/cj/Desktop/scalar_implicature/production-results/e12-anonymized-results/OGData.csv"
 OGdata <- read_csv(og_data_file)
 
+####
+# No longer needed
+# data_organizer.py creates separate column for number not answered
+####
 # Split the AQ data into two rows, one with the score and the other the number of questions not answered
-PFdata = PFdata %>%
-  separate(baroncohen_aq,c("BC_AQ","NumNotAnswered"))
+#PFdata2 = PFdata %>%
+#  separate(baroncohen_aq,c("BC_AQ","NumNotAnswered"),sep="\\.")
 
 # AQ scores by participant
-aq_scores = unique(PFdata[,c("BC_AQ","worker_id")]) %>%
-  mutate(BC_AQ=as.numeric(as.character(BC_AQ)))
+aq_scores = unique(PFdata[,c("baroncohen_aq","worker_id")]) %>%
+  mutate(BC_AQ=as.numeric(as.character(baroncohen_aq)))
 nrow(aq_scores) # Should equal number of participants
 
 # Set ggplot theme
@@ -34,8 +38,8 @@ ggplot(aq_scores, aes(x=BC_AQ)) +
 #   Study it and figure it out
 means = PFdata %>%
   filter(scale != "training1") %>%
-  # mutate(AQ_bin=cut_interval(as.numeric(BC_AQ),2)) %>%
-  mutate(AQ_bin=cut_number(as.numeric(BC_AQ),2)) %>%
+  mutate(AQ_bin=cut_interval(as.numeric(baroncohen_aq),2)) %>%
+  #mutate(AQ_bin=cut_number(as.numeric(BC_AQ),2)) %>%
   group_by(manipulation,word,scale,AQ_bin) %>%
   summarize(ProportionYes=mean(judgment)) %>%
   ungroup() %>%
