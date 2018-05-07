@@ -7,6 +7,11 @@ function showSlide(id) {
 	$("#"+id).show();
 }
 
+function showSubSlide(id) {
+	$(".subslide").hide();
+	$("#"+id).show();
+}
+
 // Get random integers.
 // When called with no arguments, it returns either 0 or 1. When called with one argument, *a*, it returns a number in {*0, 1, ..., a-1*}. When called with two arguments, *a* and *b*, returns a random value in {*a*, *a + 1*, ... , *b*}.
 function random(a,b) {
@@ -25,7 +30,7 @@ Array.prototype.random = function() {
 
 // shuffle function - from stackoverflow?
 // shuffle ordering of argument array -- are we missing a parenthesis?
-function shuffle (a) { 
+function shuffle (a) {
 	var o = [];
 
 	for (var i=0; i < a.length; i++) {
@@ -34,8 +39,73 @@ function shuffle (a) {
 
 	for (var j, x, i = o.length;
 	 i;
-	 j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);	
+	 j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
 	return o;
+}
+
+// Autism Spectrum Quotient recording
+function recordAQ() {
+	var i;
+	var j;
+	var aq_list = []
+	for (i=1; i<=50 ; i++) {
+		radios = document.getElementsByName('AQ'+i.toString());
+		for (j=0, length=radios.length; j < length; j++ ) {
+			if (radios[j].checked) {
+				aq_list[i-1] = radios[j].value;
+				break
+			}
+		}
+	}
+	console.log(aq_list);
+	experiment.data.aq = aq_list
+	experiment.debriefing()
+}
+
+function AQprogress(n) {
+	$("#AQprog").attr("style","width:" +
+			String(100 * ((TOTAL_TRIALS + NUM_AQ_SLIDES - n)/(TOTAL_TRIALS+NUM_AQ_SLIDES))) + "%");
+}
+
+function scoreAQ(arr) {
+  var AQ = 0
+  if (arr.length != 50) {
+    throw "Not all questions answered"
+  }
+  for (var i = 0; i < 50; ++i) {
+    if (typeof arr[i] == "undefined") {
+      throw "Not all questions answered"
+    }
+    // Indices where an agree response scores 1 (per Baron-Cohen), or 3/4 (per Austin)
+    var agree_scores = [1,2,4,5,6,7,9,12,13,16,18,19,20,21,22,23,26,33,35,39,41,42,43,45,46]
+    // Indices where an agree response scores 0 (per Baron-Cohen), or 2/1 (per Austin)
+    var disagree_scores = [3,8,10,11,14,15,17,24,25,27,28,29,30,31,32,34,36,37,38,40,44,47,48,49,50]
+    if (agree_scores.indexOf(i) >= 0) {
+      if (['DA','SA'].indexOf(arr[i]) >= 0) {
+        AQ += 1
+      }
+    } else if (disagree_scores.indexOf(i) >= 0) {
+      if (['DD','SD'].indexOf(arr[i]) >= 0) {
+        AQ += 1
+      }
+    }
+  }
+	return AQ
+}
+
+function showAQ() {
+	var aq_data = experiment.data.aq
+	try {
+		var AQ = scoreAQ(aq_data)
+		$('#displayAQscore').html(AQ)
+		$('#AQdisplay').show();
+	}
+	catch(err) {
+		$('#AQdisplay').html('<p class="block-text">Not all questions were \
+answered so a score could not be computed. Please click the button labeled \
+"Finish HIT" to complete the experiment and receive compensation.</p>');
+		$('#AQdisplay').show();
+	}
 }
 
 var sents = {
@@ -46,7 +116,7 @@ var sents = {
 		    low1:  "thought the food deserved a <b>low</b> rating.",
 		    //low2:  "thought the food deserved a <b>very low</b> rating?"
 		},
-		liked_loved: {		   
+		liked_loved: {
 		    hi1:  "<b>loved</b> the food.",
 		    hi2:  "<b>liked</b> the food.",
 		    low1:  "<b>disliked</b> the food.",
@@ -81,6 +151,7 @@ var sents = {
 
 //Trial condition params initializations ------------------->
 var TOTAL_TRIALS = 22;
+var NUM_AQ_SLIDES = 6
 var trials = [];
 for(var i = TOTAL_TRIALS; i > 0; --i) {
 	trials.push(i);
@@ -104,9 +175,10 @@ var experiment = {
 		expt_aim: [],
 		expt_gen: [],
 		age: [],
-		gender:[]
+		gender:[],
+		aq: []
     },
-    
+
     //End the experiment
     end: function() {
 		showSlide("finished");
@@ -124,8 +196,8 @@ var experiment = {
 		//console.log("judgment: ", judgment); for debuggging
 		if (judgment == 0) {
 			//Else respondent didn't make a response
-		    $("#testMessage").html('<font color="red">' + 
-					   'Please make a response!' + 
+		    $("#testMessage").html('<font color="red">' +
+					   'Please make a response!' +
 					   '</font>');
 		    judgment = $(".rating-stars").attr("style");
 		    judgment = parseInt(judgment.replace(/[^\d.]/g, ''));
@@ -137,19 +209,22 @@ var experiment = {
 			experiment.next();
 		}
 	},
-    
+
     //Run every trial
     next: function() {
     	//If no trials are left go to debreifing
 		if (!trials.length) {
-			return experiment.debriefing();
+			showSlide('AQ');
+			showSubSlide('AQsub');
+			return;
+			//return experiment.debriefing();
 		}
 
 		//Allow experiment to start if it's a turk worker OR if it's a test run
 		if (window.self == window.top || turk.workerId.length > 0) {
 
 		    //Clear the test message and adjust progress bar
-		    $("#testMessage").html('');  
+		    $("#testMessage").html('');
 		    $("#prog").attr("style","width:" +
 				    String(100 * (1 - trials.length/TOTAL_TRIALS)) + "%");
 
@@ -163,7 +238,7 @@ var experiment = {
 		    	current_scale = scales[0];
 		    	degree = "low1";
 		    } else if (trials.length == TOTAL_TRIALS - 2) {
-		    	trials = shuffle(trials); 
+		    	trials = shuffle(trials);
 		    	current_trial = trials.shift();
 		    	current_scale = scales[current_trial % 5 + 1];
 		    	degree = scale_degrees[current_trial % 4];
@@ -180,17 +255,17 @@ var experiment = {
 		    $("#sent_question").html("Someone said they "+
 					     sent_materials);
 
-		    $("#rating-stars").on("click", 
+		    $("#rating-stars").on("click",
 			    	function(event) {
 						var selection = $("#rating-stars").val();
 			});
 		    //###:-----------------Display trial-----------------:###
-		    
+
 		    //###:-------------Log trial data (push to data object)-------------:###
 		    experiment.data.scale.push(current_scale);
 		    experiment.data.degree.push(degree);
 		    //###:-------------Log trial data (push to data object)-------------:###
-		    
+
 		    showSlide("stage");
 
 			//Clear stars
@@ -208,7 +283,7 @@ var experiment = {
     	for (i = 18; i <= 100; i++) {
     		select_age += '<option val=' + i + '>' + i + '</option>';
     	}
-    	$('#age').html(select_age);    	
+    	$('#age').html(select_age);
     },
 
     //###:-------------Log debrief data-------------:###
