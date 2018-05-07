@@ -605,6 +605,7 @@
 
  <!-- The debriefing slide. -->
  <div class="slide" id="debriefing">
+   <div class="pad" align="center">
 	<p> What is your native/first language (i.e., the language that was primarily spoken at home when you were a child)? </p>
    <form onsubmit="experiment.submitcomments()">
 
@@ -628,16 +629,29 @@
     </form>
     <!-- Age -->
     <p> And what is your age?</p>
-    <select id="age"></select>
+    <select id="age"></select><br /><br />
     <div align="center">
-      <button type="button" id="debriefsubmit" onClick="experiment.submit_comments()">Submit</button>
+      <button type="button" id="viewAQ" onClick="showAQ();">See results</button>
+      <button type="button" id="debriefsubmit" onClick="experiment.submit_comments()">Finish HIT</button>
     </div>
 
   </form>
+  <br />
+  <div align="center" id="AQdisplay" style="display: none;">
+    <p class="aq-results">
+      Scores on this test can be between 0 and 50, with most people scoring around 16, and rarely above 30.<br />
+      <br />
+      Scores closer to 0 show that you are more adept at social skills and multi-tasking.<br />
+      Scores closer to 50 show that you pay closer attention to details and are more at home in routines.<br />
+      <br />
+      <span style="color: blue;">Your score was <span id="displayAQscore"></span></span>
+  </div>
+    </div>
+  </div>
 
 <!-- The finish slide. -->
 <div class="slide" id="finished">
-	You're finished - thanks for participating! Submitting to Mechanical Turk...
+	   You're finished - thanks for participating! Submitting to Mechanical Turk...
 </div>
 
 <script src="implicatures_e11.js"></script>

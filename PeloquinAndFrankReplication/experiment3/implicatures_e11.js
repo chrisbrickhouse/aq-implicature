@@ -214,6 +214,7 @@ var experiment = {
     next: function() {
     	//If no trials are left go to debreifing
 		if (!trials.length) {
+			AQprogress(6);
 			showSlide('AQ');
 			showSubSlide('AQsub');
 			return;
@@ -226,7 +227,7 @@ var experiment = {
 		    //Clear the test message and adjust progress bar
 		    $("#testMessage").html('');
 		    $("#prog").attr("style","width:" +
-				    String(100 * (1 - trials.length/TOTAL_TRIALS)) + "%");
+				    String(100 * ((TOTAL_TRIALS - trials.length)/(TOTAL_TRIALS+NUM_AQ_SLIDES))) + "%");
 
 		    //Trial params ---------------------------->
 		    if(trials.length == TOTAL_TRIALS) {
