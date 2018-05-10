@@ -1,42 +1,40 @@
 # Load data
 
-library(readr)
-library(tidyr)
-library(dplyr)
-library(ggplot2)
-library(magrittr)
-library(forcats)
+library(tidyverse)
 library("wesanderson")
 # Error bars
 source("helpers.R")
-#library(tidyverse)
 
-data_file <- "Desktop/PragListener.csv"
-PFdata <- read_csv(data_file)
+data_file <- "~/Desktop/PragListener.csv"
 PFdata = read.table(data_file,header=T,sep=",",quote="")
 
 # AQ scores by participant
-aq_scores = unique(PFdata[,c("baroncohen_aq","worker_id")]) %>%
+## 0-50 per Baron-Cohen et al 2001
+bc_aq_scores = unique(PFdata[,c("baroncohen_aq","worker_id")]) %>%
   mutate(BC_AQ=as.numeric(as.character(baroncohen_aq)))
+## 50 - 200 per Austin 2005
+a_aq_scores = unique(PFdata[,c("austin_aq","worker_id")]) %>%
+  mutate(A_AQ=as.numeric(as.character(austin_aq)))
+
 nrow(aq_scores) # Should equal number of participants
 
 # Set ggplot theme
 theme_set(theme_bw())
 
 # Plot histogram of AQ scores
-ggplot(aq_scores, aes(x=BC_AQ)) +
-  geom_histogram(binwidth = 2)
+ggplot(bc_aq_scores, aes(x=BC_AQ)) +
+  geom_histogram(binwidth = 5)
 
-# Judith wrote most of this, it organizes the data into a format ggplot can handle
-#   Study it and figure it out
+# Thanks to Masoud Jasbi for a bunch of this
 means = PFdata %>%
   filter(scale != "training1") %>%
   #filter(!worker_id %in% PFexcluded) %>%
   mutate(AQ_bin=cut_width(as.numeric(baroncohen_aq),25,12.5)) %>%
+  #mutate(AQ_bin=cut_number(as.numeric(austin_aq),n=2)) %>%
   group_by(AQ_bin) %>%
-  mutate(n_part = length(unique(worker_id))) %>%
+  mutate(n_participants_in_group = length(unique(worker_id))) %>%
   group_by(judgment,AQ_bin,word) %>%
-  mutate(count_ppl = n(),propResp=count_ppl/n_part) %>%
+  mutate(freq_of_response = n(),propResp=freq_of_response/n_participants_in_group) %>%
   #mutate(AQ_bin=cut_number(as.numeric(BC_AQ),2)) %>%
   #group_by(judgment,word,scale,AQ_bin) %>%
   #summarize(numYes=n()) %>%
