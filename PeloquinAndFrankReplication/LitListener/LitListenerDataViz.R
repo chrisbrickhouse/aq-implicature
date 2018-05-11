@@ -1,32 +1,16 @@
+# Require packages
+library(tidyverse)      # Data wrangling
+library(wesanderson)    # Colors
+source("../helpers.R")  # Confidence Intervals
+
 # Load data
-
-library(readr)
-library(tidyr)
-library(dplyr)
-library(ggplot2)
-library(magrittr)
-library(forcats)
-library("wesanderson")
-# Error bars
-source("helpers.R")
-#library(tidyverse)
-
-data_file <- "Desktop/PeloquinAndFrankReplicationData_Pilot.csv"
-PFdata <- read_csv(data_file)
-PFdata = read.table(data_file,header=T,sep=",",quote="")
-og_data_file <- "/home/cj/Desktop/scalar_implicature/production-results/e12-anonymized-results/OGData.csv"
-OGdata <- read_csv(og_data_file)
-
-####
-# No longer needed
-# data_organizer.py creates separate column for number not answered
-####
-# Split the AQ data into two rows, one with the score and the other the number of questions not answered
-#PFdata2 = PFdata %>%
-#  separate(baroncohen_aq,c("BC_AQ","NumNotAnswered"),sep="\\.")
+L0_data_file <- "~/Desktop/PeloquinAndFrankReplicationData_Pilot.csv"
+L0data <- read_csv(L0_data_file)
+PF2016_data_file <- "/home/cj/Desktop/scalar_implicature/production-results/e12-anonymized-results/OGData.csv"
+PF2016data <- read_csv(PF2016_data_file)
 
 # AQ scores by participant
-aq_scores = unique(PFdata[,c("baroncohen_aq","worker_id")]) %>%
+aq_scores = unique(L0data[,c("baroncohen_aq","worker_id")]) %>%
   mutate(BC_AQ=as.numeric(as.character(baroncohen_aq)))
 nrow(aq_scores) # Should equal number of participants
 
@@ -35,19 +19,19 @@ theme_set(theme_bw())
 
 # Plot histogram of AQ scores
 ggplot(aq_scores, aes(x=BC_AQ)) +
-  geom_histogram(binwidth = 2)
+  geom_histogram(binwidth = 3)
 
 # Filter those who failed training trials
-PFexcluded = PFdata %>%
+excluded = L0data %>%
   filter(scale == "training1") %>%
   filter(judgment == 0) %>%
   select(worker_id)
 
 # Judith wrote most of this, it organizes the data into a format ggplot can handle
 #   Study it and figure it out
-means = PFdata %>%
+means = L0data %>%
   filter(scale != "training1") %>%
-  filter(!worker_id %in% PFexcluded) %>%
+  filter(!worker_id %in% excluded$worker_id) %>%
   mutate(AQ_bin=cut_width(as.numeric(baroncohen_aq),25,12.5)) %>%
   #mutate(AQ_bin=cut_number(as.numeric(BC_AQ),2)) %>%
   group_by(manipulation,word,scale,AQ_bin) %>%
@@ -62,7 +46,7 @@ means = PFdata %>%
 
 # Plot means with facets by word and color denoting high or low AQ group
 ggplot(means, aes(x=manipulation/20,y=ProportionYes,color=AQ_bin)) +
-  #scale_color_manual(values = wes_palette("BottleRocket2"))+
+  scale_color_manual(values = wes_palette("FantasticFox1")[-c(1,2)])+
   geom_point() +
   geom_errorbar(aes(ymin=YMin,ymax=YMax),width=0) +
   geom_line() +
@@ -70,13 +54,13 @@ ggplot(means, aes(x=manipulation/20,y=ProportionYes,color=AQ_bin)) +
   labs(x="Number of Stars", y="Proportion of 'yes' responses")
 
 par(mfrow=c(5,5))
-for (s in unique(PFdata$scale)) {
+for (s in unique(L0data$scale)) {
   for (d in c('low2','low1','mid','hi2','hi1')) {
     if (s == 'training1') {
       next
     }
-    word_data <- subset(PFdata,scale == s & degree == d)
-    og_word_data <- subset(OGdata,scale == s & degree == d)
+    word_data <- subset(L0data,scale == s & degree == d)
+    og_word_data <- subset(PF2016data,scale == s & degree == d)
     y = c(
       mean(subset(word_data,manipulation == 20)$judgment),
       mean(subset(word_data,manipulation == 40)$judgment),
