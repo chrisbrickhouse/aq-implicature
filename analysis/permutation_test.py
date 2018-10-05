@@ -194,7 +194,7 @@ DATA_COL = 29
 PERMUTATION_N = 1000
 Z_CRIT = 1.95
 print('### Comparison of High and Low AQ Groups ###')
-ifile = 'pandflive_full.results'
+ifile = 'pandflive_full.csv'
 raw_data = []
 with open(ifile,'r') as f:
     for line in f.readlines():
@@ -203,7 +203,9 @@ with open(ifile,'r') as f:
 
 p_data = {}
 for row in raw_data[1:]:
+    #print(row[-1])
     json_string = row[DATA_COL].replace('""','"')[1:-1]
+    #print(json_string)
     pd = json.loads(json_string)
     workerid = row[WORKER_COL].strip('"')
     aq_responses = pd['aq']
@@ -213,7 +215,8 @@ for row in raw_data[1:]:
     p_data[workerid] = pd
 
 bc_aq_list = [math.floor(p_data[x]['bc_aq']) for x in p_data.keys()]
-aq_median = statistics.median(bc_aq_list)
+#aq_median = statistics.median(bc_aq_list)
+aq_median = 25
 high_aq = [x for x in p_data.keys() if p_data[x]['bc_aq'] > aq_median]
 low_aq = [x for x in p_data.keys() if p_data[x]['bc_aq'] <= aq_median]
 test_value = compare_groups(high_aq,low_aq,p_data)
