@@ -1,7 +1,7 @@
 # Require packages
 library(tidyverse)      # Data wrangling
 library(wesanderson)    # Colors
-source("../helpers.R")  # Confidence Intervals
+source("./helpers.R")  # Confidence Intervals
 
 #Load data
 L1_data_file <- "~/Desktop/PragListener_subscale.csv"

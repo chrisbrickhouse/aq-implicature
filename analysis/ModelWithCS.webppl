@@ -1,0 +1,856 @@
+var L1_data_low = function(word,state) {
+  if (word == "loved") {
+    var data = {
+        1:0,
+        2:0,
+        3:0,
+        4:0.209302325581395,
+        5:0.790697674418605
+    }
+    return data[state]
+  } else if (word == "liked") {
+    var data = {
+        1:0,
+        2:0,
+        3:0.267441860465116,
+        4:0.674418604651163,
+        5:0.058139534883721
+    }
+    return data[state]
+  } else if (word == "disliked") {
+    var data = {
+        1:0.441860465116279,
+        2:0.523255813953488,
+        3:0.034883720930233,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "hated") {
+    var data = {
+        1:0.941860465116279,
+        2:0.058139534883721,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "all") {
+    var data = {
+        1:0,
+        2:0,
+        3:0,
+        4:0.313953488372093,
+        5:0.686046511627907
+    }
+    return data[state]
+  } else if (word == "bad") {
+    var data = {
+        1:0.720930232558139,
+        2:0.27906976744186,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "bland") {
+    var data = {
+        1:0.093023255813954,
+        2:0.802325581395349,
+        3:0.104651162790698,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "delicious") {
+    var data = {
+        1:0,
+        2:0,
+        3:0.011627906976744,
+        4:0.255813953488372,
+        5:0.732558139534884
+    }
+    return data[state]
+  } else if (word == "disgusting") {
+    var data = {
+        1:1,
+        2:0,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "excellent") {
+    var data = {
+        1:0,
+        2:0,
+        3:0,
+        4:0.116279069767442,
+        5:0.883720930232558
+    }
+    return data[state]
+  } else if (word == "forgettable") {
+    var data = {
+        1:0.22093023255814,
+        2:0.651162790697674,
+        3:0.127906976744186,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "good") {
+    var data = {
+        1:0,
+        2:0,
+        3:0.209302325581395,
+        4:0.779069767441861,
+        5:0.011627906976744
+    }
+    return data[state]
+  } else if (word == "gross") {
+    var data = {
+        1:0.965116279069767,
+        2:0.034883720930233,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "memorable") {
+    var data = {
+        1:0,
+        2:0,
+        3:0,
+        4:0.581395348837209,
+        5:0.418604651162791
+    }
+    return data[state]
+  } else if (word == "most") {
+    var data = {
+        1:0,
+        2:0,
+        3:0.348837209302326,
+        4:0.651162790697674,
+        5:0
+    }
+    return data[state]
+  } else if (word == "none") {
+    var data = {
+        1:0.976744186046512,
+        2:0.023255813953488,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "palatable") {
+    var data = {
+        1:0.011627906976744,
+        2:0.151162790697674,
+        3:0.709302325581395,
+        4:0.127906976744186,
+        5:0
+    }
+    return data[state]
+  } else if (word == "some") {
+    var data = {
+        1:0,
+        2:0.174418604651163,
+        3:0.802325581395349,
+        4:0.023255813953488,
+        5:0
+    }
+    return data[state]
+  } else if (word == "terrible") {
+    var data = {
+        1:0.965116279069767,
+        2:0.034883720930233,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "unforgettable") {
+    var data = {
+        1:0,
+        2:0,
+        3:0.023255813953488,
+        4:0.081395348837209,
+        5:0.895348837209302
+    }
+    return data[state]
+  }
+};
+
+var L1_data_high = function(word,state) {
+  if (word == "loved") {
+    var data = {
+        1:0,
+        2:0,
+        3:0,
+        4:0,
+        5:1
+    }
+    return data[state]
+  } else if (word == "liked") {
+    var data = {
+        1:0,
+        2:0,
+        3:0.363636363636364,
+        4:0.636363636363636,
+        5:0
+    }
+    return data[state]
+  } else if (word == "disliked") {
+    var data = {
+        1:0.454545454545455,
+        2:0.545454545454545,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "hated") {
+    var data = {
+        1:1,
+        2:0,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "all") {
+    var data = {
+        1:0,
+        2:0,
+        3:0,
+        4:0.272727272727273,
+        5:0.727272727272727
+    }
+    return data[state]
+  } else if (word == "bad") {
+    var data = {
+        1:0.727272727272727,
+        2:0.272727272727273,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "bland") {
+    var data = {
+        1:0.181818181818182,
+        2:0.727272727272727,
+        3:0.090909090909091,
+        4:0,
+        5:0
+
+    }
+    return data[state]
+  } else if (word == "delicious") {
+    var data = {
+        1:0,
+        2:0,
+        3:0,
+        4:0.181818181818182,
+        5:0.818181818181818
+    }
+    return data[state]
+  } else if (word == "disgusting") {
+    var data = {
+        1:1,
+        2:0,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "excellent") {
+    var data = {
+        1:0,
+        2:0,
+        3:0,
+        4:0,
+        5:1
+    }
+    return data[state]
+  } else if (word == "forgettable") {
+    var data = {
+        1:0.363636363636364,
+        2:0.545454545454545,
+        3:0.090909090909091,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "good") {
+    var data = {
+        1:0,
+        2:0,
+        3:0.545454545454545,
+        4:0.454545454545455,
+        5:0
+    }
+    return data[state]
+  } else if (word == "gross") {
+    var data = {
+        1:1,
+        2:0,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "memorable") {
+    var data = {
+        1:0,
+        2:0,
+        3:0,
+        4:0.545454545454545,
+        5:0.454545454545455
+    }
+    return data[state]
+  } else if (word == "most") {
+    var data = {
+        1:0,
+        2:0,
+        3:0.363636363636364,
+        4:0.636363636363636,
+        5:0,
+    }
+    return data[state]
+  } else if (word == "none") {
+    var data = {
+        1:1,
+        2:0,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "palatable") {
+    var data = {
+        1:0,
+        2:0.181818181818182,
+        3:0.636363636363636,
+        4:0.181818181818182,
+        5:0
+    }
+    return data[state]
+  } else if (word == "some") {
+    var data = {
+        1:0,
+        2:0,
+        3:1,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "terrible") {
+    var data = {
+        1:0.909090909090909,
+        2:0.090909090909091,
+        3:0,
+        4:0,
+        5:0
+    }
+    return data[state]
+  } else if (word == "unforgettable") {
+    var data = {
+        1:0,
+        2:0,
+        3:0,
+        4:0,
+        5:1
+    }
+    return data[state]
+  }
+};
+
+var getScale = function(word) {
+  var ll = [
+        "loved",
+        "liked",
+        "disliked",
+        "hated"
+      ]
+  var gx = [
+        "excellent",
+        "good",
+        "bad",
+        "terrible"
+      ]
+  var pd = [
+        "delicious",
+        "palatable",
+        "gross",
+        "disgusting"
+       ]
+  var mu = [
+      "unforgettable",
+      "memorable",
+      "bland",
+      "forgettable"
+      ]
+  var sa = [
+        "all",
+        "most",
+        "some",
+        "none"
+      ]
+  if (ll.includes(word)) {
+    return "liked_love"
+  } else if (gx.includes(word)) {
+    return "good_excellent"
+  } else if (pd.includes(word)) {
+    return "palatable_delicious"
+  } else if (mu.includes(word)) {
+    return "memorable_unforgettable"
+  } else if (sa.includes(word)) {
+    return "some_all"
+  }
+}
+
+var getAlts = function(word) {
+  var ll = [
+        "loved",
+        "liked",
+        "disliked",
+        "hated"
+      ]
+  var gx = [
+        "excellent",
+        "good",
+        "bad",
+        "terrible"
+      ]
+  var pd = [
+        "delicious",
+        "palatable",
+        "gross",
+        "disgusting"
+       ]
+  var mu = [
+      "unforgettable",
+      "memorable",
+      "bland",
+      "forgettable"
+      ]
+  var sa = [
+        "all",
+        "most",
+        "some",
+        "none"
+      ]
+  if (ll.includes(word)) {
+    return ll
+  } else if (gx.includes(word)) {
+    return gx
+  } else if (pd.includes(word)) {
+    return pd
+  } else if (mu.includes(word)) {
+    return mu
+  } else if (sa.includes(word)) {
+    return sa
+  }
+}
+
+var scaleAlt = function(word) {
+  var scale = getScale(word);
+  if (scale == "liked_love") {
+    var utterances = {
+      "loved" : Categorical({
+        ps: [
+            0,
+            0,
+            0.03636364,
+            0.72727273,
+            1.0
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "liked" : Categorical({
+        ps: [
+            0,
+            0.01818182,
+            0.76363636,
+            1.0,
+            0.96363636
+            ], 
+        vs: [1,2,3,4,5]
+      }),
+      "indifferent" : Categorical({
+        ps: [
+            0.30909091,
+            0.58181818,
+            0.70909091,
+            0.01818182,
+            0
+            ], 
+        vs: [1,2,3,4,5]
+      }),
+      "disliked": Categorical({
+          ps: [
+            0.98181818,
+            0.90909091,
+            0.14545455,
+            0,
+            0
+            ],
+          vs: [1,2,3,4,5]
+      }),
+      "hated": Categorical({
+          ps: [
+            0.96363636,
+            0.56363636,
+            0.01818182,
+            0,
+            0
+            ],
+          vs: [1,2,3,4,5]
+      }),
+      "alts": [
+        "loved",
+        "liked",
+        //"indifferent",
+        "disliked",
+        "hated"
+      ] 
+    }
+    return utterances[word];
+  } else if (scale == "good_excellent") {
+    var utterances = {
+      "excellent" : Categorical({
+        ps: [
+            0.01818182,
+            0.01818182,
+            0.03636364,
+            0.69090909,
+            0.98181818
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "good" : Categorical({
+        ps: [
+            0,
+            0.01818182,
+            0.72727273,
+            0.98181818,
+            0.98181818
+            ], 
+        vs: [1,2,3,4,5]
+      }),
+      "okay" : Categorical({
+        ps: [0.08333333,0.45000000,1,0.65000000,0.40000000], 
+        vs: [1,2,3,4,5]
+      }),
+      "bad": Categorical({
+        ps: [
+            0.94545455,
+            0.89090909,
+            0.07272727,
+            0.01818182,
+            0
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "terrible": Categorical({
+        ps: [
+            0.94545455,
+            0.61818182,
+            0,
+            0,
+            0
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "alts": [
+        "excellent",
+        "good",
+        //"okay",
+        "bad",
+        "terrible"
+      ]
+    }
+    return utterances[word];
+  } else if (scale == "palatable_delicious") {
+    var utterances = {
+      "delicious" : Categorical({
+        ps: [
+            0,
+            0,
+            0.16363636,
+            0.89090909,
+            1
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "palatable" : Categorical({
+        ps: [
+            0.03636364,
+            0.4,
+            0.90909091,
+            0.87272727,
+            0.89090909
+            ], 
+        vs: [1,2,3,4,5]
+      }),
+      "mediocre" : Categorical({
+        ps: [0.46666667,0.80000000,0.81666667,0.05000000,0], 
+        vs: [1,2,3,4,5]
+      }),
+      "gross": Categorical({
+        ps: [
+            0.98181818,
+            0.50909091,
+            0.05454545,
+            0.01818182,
+            0
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "disgusting": Categorical({
+        ps: [
+            0.92727273,
+            0.45454545,
+            0,
+            0,
+            0
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "alts" : [
+        "delicious",
+        "palatable",
+        //"mediocre",
+        "gross",
+        "disgusting"
+       ]
+    }
+    return utterances[word];
+  } else if (scale == "memorable_unforgettable") {
+    var utterances = {
+      "unforgettable" : Categorical({
+        ps: [
+            0.25454545,
+            0.10909091,
+            0.05454545,
+            0.41818182,
+            0.81818182
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "memorable" : Categorical({
+        ps: [
+            0.05454545,
+            0,
+            0.09090909,
+            0.83636364,
+            0.98181818
+            ], 
+        vs: [1,2,3,4,5]
+      }),
+      "ordinary" : Categorical({ //not actualy the values
+        ps: [0.46666667,0.80000000,0.81666667,0.05000000,0], 
+        vs: [1,2,3,4,5]
+      }),
+      "bland": Categorical({
+        ps: [
+            0.94545455,
+            0.98181818,
+            0.47272727,
+            0,
+            0.01818182
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "forgettable": Categorical({
+        ps: [
+            0.92727273,
+            1,
+            0.63636364,
+            0.03636364,
+            0.03636364
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "alts" : [
+      "unforgettable",
+      "memorable",
+      "bland",
+      "forgettable"
+      ]
+    }
+    return utterances[word];
+  } else if (scale == "some_all") {
+    var utterances = {
+      "all" : Categorical({
+        ps: [
+            0,
+            0,
+            0.09090909,
+            0.60000000,
+            1
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "most" : Categorical({
+        ps: [
+            0,
+            0.03636364,
+            0.58181818,
+            1,
+            0.98181818
+            ], 
+        vs: [1,2,3,4,5]
+      }),
+      "some" : Categorical({ 
+        ps: [
+            0.07272727,
+            0.56363636,
+            1,
+            0.94545455,
+            0.65454545
+            ], 
+        vs: [1,2,3,4,5]
+      }),
+      "little": Categorical({ //not actualy the values
+        ps: [
+            0.94545455,
+            0.98181818,
+            0.47272727,
+            0,
+            0.01818182
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "none": Categorical({
+        ps: [
+            0.92727273,
+            0.25454545,
+            0,
+            0,
+            0.01818182
+            ],
+        vs: [1,2,3,4,5]
+      }),
+      "alts" : [
+        "all",
+        "most",
+        "some",
+        "none"
+      ]
+    }
+    return utterances[word];
+  }
+}
+
+var worldPrior = function() {
+  var num_stars = randomInteger(5)+1;  // 5 stars.. 1-5 can be nice.
+  return num_stars;
+};
+
+var utterancePrior = function(u) {
+  var alts = getAlts(u)
+  var u = uniformDraw(alts)
+  return u;
+}
+
+var scalePrior = function() {
+  var scales = [
+    "liked_love",
+    "good_excellent",
+    "palatable_delicious",
+    "memorable_unforgettable",
+    "some_all"
+  ]
+  var s = uniformDraw(scales)
+  return s;
+}
+
+var literalListener = function(utterance) {
+  var dist = scaleAlt(utterance)
+  return dist
+};
+
+var speaker = function(utterance,world,a) {
+  return Infer({method: 'enumerate'}, function() {
+    var u = utterancePrior(utterance);
+    //display(u)
+    var L = literalListener(u);
+    //display(L.score(world))
+    //var a = alpha();
+    factor(a * L.score(world) );
+    return u
+  });
+};
+
+var listener = function(utterance,a) {
+  return Infer({method: 'enumerate'}, function() {
+    var world = worldPrior();
+    var S = speaker(utterance,world,a);
+    factor(S.score(utterance));
+    return world;
+  });
+};
+
+//var g = gamma({shape:2,scale:2});
+//viz(g)
+
+var posterior = function() {
+  var wordList = [
+    "excellent",
+	"memorable",
+	"all",
+	"disgusting",
+	"some",
+	"liked",
+	"none",
+	"hated",
+	"loved",
+	"disliked",
+	"terrible",
+	"forgettable",
+	"palatable",
+	"most",
+	"gross",
+	"bad",
+	"bland",
+	"unforgettable",
+	"good",
+	"delicious"
+  ]
+  //var alpha = uniform({a:0,b:10});
+  var high_alpha = gamma({shape:3,scale:3});
+  var low_alpha = gamma({shape:3,scale:3});
+  globalStore.likelihood = 0
+  mapData({data:wordList}, function(u) {
+    mapData({data:[1,2,3,4,5]}, function(n) {
+      var L1_high = listener(u,high_alpha)
+      var L1_low  = listener(u,low_alpha)
+      var e1 = Math.pow(Math.exp(L1_high.score(n)) - L1_data_high(u,n), 2)
+      var e2 = Math.pow(Math.exp(L1_low.score(n)) - L1_data_low(u,n), 2)
+      globalStore.likelihood += (e1+e2)
+    })
+  })
+  var likelihood = -globalStore.likelihood
+  factor(likelihood)
+  return {high_alpha,low_alpha}
+};
+
+
+//viz(literalListener("some"))
+//viz(speaker("all",2,1))
+//viz(listener("some",1))
+//display(utterancePrior("some"))
+//posterior()
+
+var posterior_samples = Infer({
+  method: "MCMC",
+  samples: 10000, // how many samples to obtain
+  burn: 1500,     // number of steps for algorithm to adapt
+  model: posterior//,
+  //lag: 5
+})
+
+viz(posterior_samples)

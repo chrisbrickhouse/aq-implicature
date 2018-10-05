@@ -148,9 +148,25 @@ def scoreAQ(responses):
         49,
         50
     ]
+    # Communication Subscale Indices
+    cs_subscale = [
+        7,
+        17,
+        18,
+        26,
+        27,
+        31,
+        33,
+        35,
+        38,
+        39
+    ]
     baroncohen_score = 0
     austin_score = 0
+    not_answered = 0
     for i in range(len(responses)):
+        if i+1 not in cs_subscale:
+            continue
         if i+1 in agree_scores:
             if responses[i] == 'DA':
                 baroncohen_score += 1
@@ -165,8 +181,7 @@ def scoreAQ(responses):
                 baroncohen_score += 0
                 austin_score += 1
             elif responses[i] is None:
-                baroncohen_score += 0.01
-                austin_score += 0.01
+                not_answered += 1
             else:
                 raise ValueError(f'Unknown AQ response {responses[i]}')
         elif i+1 in disagree_scores:
@@ -183,8 +198,7 @@ def scoreAQ(responses):
                 baroncohen_score += 1
                 austin_score += 4
             elif responses[i] is None:
-                baroncohen_score += 0.01
-                austin_score += 0.01
+                not_answered += 1
             else:
                 raise ValueError(f'Unknown AQ response {responses[i]}')
     return(baroncohen_score,austin_score)
@@ -194,7 +208,7 @@ DATA_COL = 29
 PERMUTATION_N = 1000
 Z_CRIT = 1.95
 print('### Comparison of High and Low AQ Groups ###')
-ifile = 'pandflive_full.csv'
+ifile = '../data/psycholing_results/pandflive_full.tsv'
 raw_data = []
 with open(ifile,'r') as f:
     for line in f.readlines():
@@ -216,7 +230,7 @@ for row in raw_data[1:]:
 
 bc_aq_list = [math.floor(p_data[x]['bc_aq']) for x in p_data.keys()]
 #aq_median = statistics.median(bc_aq_list)
-aq_median = 25
+aq_median = 5
 high_aq = [x for x in p_data.keys() if p_data[x]['bc_aq'] > aq_median]
 low_aq = [x for x in p_data.keys() if p_data[x]['bc_aq'] <= aq_median]
 test_value = compare_groups(high_aq,low_aq,p_data)
@@ -265,6 +279,7 @@ for s in data_arrays:
                 n_sig +=1
                 print(s,d,m,z)
 print(f'### {n_sig} significant results of {n_tested}')
+exit()  # I need to redownload the data, so skip the rest of this by exiting.
 print('######')
 print('### Comparison with Original Study Data ###')
 
