@@ -1,4 +1,13 @@
+# Keep R Studio files out.
 .RData
 .Rhistory
 .Rproj.user
 *.Rproj
+
+# Prevent data from being pushed unless I'm sure it's clean.
+*.results
+*.csv
+
+# Ignore all files with a trailing tilde.
+*~
+~*
