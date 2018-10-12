@@ -13,9 +13,25 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>
+
+  <div class = "slide" id = "auth">
+  <p> <br> <p>
+    <p>
+
+    <form target="_blank" id="verify_form" method="post">
+    <center>
+      <div class="g-recaptcha" data-sitekey="6LfJonQUAAAAAKrNn23l-RmVbQ7sG6yHD4X2P25W"></div>
+    <p>
+    <input type="submit" name="submit" value="Begin HIT"><br>
+    </center>
+    </form>
+    <div class="loading" style="display:none"><p>Loading HIT...</div>
+    <div class="captcha_error" style="display:none"><p><font color="FF0000">ERROR: You must pass the reCaptcha authentication before proceeding.</font></div>
+  </div>
 
 <!-- First Page -->
 <div class="slide" id="instructions">

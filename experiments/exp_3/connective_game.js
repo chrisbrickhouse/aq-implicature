@@ -200,7 +200,7 @@ var totalTrials = rsample.length + numAQ;
 // ############################## The Experiment Code and Functions ##############################
 
 // Show the first slide
-showSlide("instructions");
+showSlide("auth");
 
 var experiment = {
 
