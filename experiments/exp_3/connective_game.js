@@ -27,7 +27,7 @@ function recordAQ() {
 			}
 		}
 	}
-	console.log(aq_list);
+	//console.log(aq_list);
 	experiment.data.aq = aq_list
 	experiment.debriefing()
 }
@@ -299,9 +299,9 @@ var experiment = {
     next: function() {
       // Allow experiment to start if it's a turk worker OR if it's a test run
       if (window.self == window.top | turk.workerId.length > 0) {
-          console.log(rsample.length)
-          console.log(totalTrials)
-          console.log(1-(rsample.length+5)/totalTrials)
+          //console.log(rsample.length)
+          //console.log(totalTrials)
+          //console.log(1-(rsample.length+5)/totalTrials)
           $("#testMessage").html('');   // clear the test message
           $("#prog").attr("style","width:" +
               String(100 * (1 - (rsample.length+numAQ)/totalTrials)) + "%")
