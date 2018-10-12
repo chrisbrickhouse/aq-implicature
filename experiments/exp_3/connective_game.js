@@ -56,11 +56,11 @@ function options() {
 
 // Randomize Radio Buttons
 function createRadioButtons() {
-  choice = random(2,5)
+  choice = random(3,3)
   var radio = Array.from(document.getElementsByName(String(choice)))
-  // if (choice == 3 || choice == 4) {
-  //   radio.push(document.getElementsByName('slider' + choice)[0])
-  // }
+  if (choice == 3 || choice == 4) {
+     radio.push(document.getElementsByName('slider' + choice)[0])
+  }
   for (i = 0; i < radio.length; i++) {
     radio[i].style.visibility = 'visible'
   }
@@ -120,16 +120,16 @@ function randomTrials(trials){
   return shuffle(output)
 }
 
-// //Track Slider!
-// document.addEventListener('DOMContentLoaded',function() {
-//     document.getElementsByName('slider3')[0].onchange=changeEventHandler;
-//     document.getElementsByName('slider4')[0].onchange=changeEventHandler;
-// },false);
+//Track Slider!
+document.addEventListener('DOMContentLoaded',function() {
+    document.getElementsByName('slider3')[0].onchange=changeEventHandler;
+    //document.getElementsByName('slider4')[0].onchange=changeEventHandler;
+},false);
 
 response_logged = false;
-// function changeEventHandler(event) {
-//     response_logged = true;
-// }
+function changeEventHandler(event) {
+    response_logged = true;
+}
 
 // from: http://www.sitepoint.com/url-parameters-jquery/
 $.urlParam = function(name){
@@ -246,7 +246,7 @@ var experiment = {
     log_response: function() {
       var elapsed = Date.now() - experiment.start_ms;
       var response_types = ['','true-false','binary','tertiary','quatenary','quinary']
-      if (choice < 6) {
+      if (choice > 6) {
         // Radio Button Collection
         var radios = [];
         var initial = document.getElementsByName(String(choice));
@@ -270,8 +270,8 @@ var experiment = {
       } else {
         if (response_logged) {
           // Slider Data Collection
-          var sliders = document.getElementsByName('slider' + choice)[0];
-          experiment.data.type.push(choice);
+          var sliders = document.getElementsByName('slider3')[0];
+          experiment.data.response_type.push("slider");
           experiment.data.response.push(sliders.value);
           experiment.data.elapsed_ms.push(elapsed);
           experiment.data.num_errors.push(experiment.num_errors);

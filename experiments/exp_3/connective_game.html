@@ -111,7 +111,7 @@
                 <tr>
                     <td><img id="card"/ width="500" height="250"></td>
                 </tr>
-                <tr>
+                <!--<tr>
                   <td>
                     <label style='visibility: hidden' name = '2'><input type="radio" name="judgment" value="Wrong">Wrong</label>
                     <label style='visibility: hidden' name = '2'><input type="radio" name="judgment" value="Right">Right</label>
@@ -139,21 +139,21 @@
                     <label style='visibility: hidden' name = '5'><input type="radio" name="judgment" value="Neither">Neither</label>
                     <label style='visibility: hidden' name = '5'><input type="radio" name="judgment" value="Kinda Right">Kinda Right</label>
                     <label style='visibility: hidden' name = '5'><input type="radio" name="judgment" value="Right">Right</label>
-                    <script type="text/javascript">
-                      createRadioButtons();
-                    </script>
                   </td>
-                </tr>
- <!--                <tr>
+                </tr>-->
+                <tr>
                   <td>
                     <div class="slidecontainer">
-                      <label for="WR" style='visibility: hidden' name = '3' class="pull-left">Wrong</label>
-                      <label for="WR" style='visibility: hidden' name = '3' class="pull-right">Right</label>
+                      <label for="WR" style='visibility: hidden; margin-bottom:-5px;' name = '3' class="pull-left">Wrong</label>
+                      <label for="WR" style='visibility: hidden; margin-bottom:-5px;' name = '3' class="pull-right">Right</label>
                       <input style='visibility: hidden' name = 'slider3' type="range" min="0" max="100" value="50" class="slider" id="WR">
+                      <script type="text/javascript">
+                        createRadioButtons();
+                      </script>
                     </div>
                   </td>
                 </tr>
-                <tr>
+<!--                <tr>
                   <td>
                     <div class="slidecontainer">
                       <label for="DWDR" style='visibility: hidden' name = '4' class="pull-left">Definitely Wrong</label>
@@ -164,7 +164,7 @@
                       createRadioButtons();
                     </script>
                   </td>
-                </tr> -->
+                </tr>-->
                 <tr>
                     <td align="center">
                         <button type="button" id="nextButton" onClick="experiment.log_response()">Next</button>
