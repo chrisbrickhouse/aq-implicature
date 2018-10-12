@@ -759,6 +759,31 @@
 </div>
 
 <script src="connective_game.js"></script>
+<script>
+  // Attach a submit handler to the form
+  $( "#verify_form" ).submit(function( event ) {
+
+    // Stop form from submitting normally
+    event.preventDefault();
+    $(".captcha_error").hide()
+    $(".loading").show();
+    function looseJsonParse(obj){
+      return Function('"use strict";return (' + obj + ')')();
+    }
+
+    $.ajax({
+    type: "POST",
+    url: "https://stanford.edu/~ctb77/cgi-bin/verify.php",
+    data : {"captcha" : grecaptcha.getResponse()},
+    success: function(data) {
+      console.log(looseJsonParse(data));
+      },
+    error: function() {
+      console.log("Error: form not sent");
+      },
+    });
+  });
+</script>
 
 </body>
 
